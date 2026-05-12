@@ -76,10 +76,12 @@ a {
 
 .brand,
 .hero h1,
+.page-hero h1,
 .section-heading h2,
 .site-footer h2,
 .post-card h3,
 .project-panel h3,
+.archive-item h2,
 .post-hero h1,
 .post-body h2 {
   font-family: "Noto Serif SC", serif;
@@ -237,6 +239,7 @@ a {
 }
 
 .section-heading h2,
+.page-hero h1,
 .site-footer h2,
 .post-body h2 {
   margin: 0;
@@ -260,6 +263,10 @@ a {
 
 .post-list {
   grid-template-columns: 1.3fr 1fr 1fr;
+}
+
+.post-list-featured {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .post-card,
@@ -297,6 +304,41 @@ a {
   display: inline-flex;
   margin-top: 22px;
   color: var(--accent-deep);
+  font-weight: 700;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(36, 24, 20, 0.12);
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--text-soft);
+  font-size: 0.88rem;
+}
+
+.tag:hover,
+.tag.is-active {
+  color: var(--accent-deep);
+  border-color: rgba(140, 71, 33, 0.3);
+}
+
+.tag-inline {
+  min-height: 28px;
+  padding: 0 12px;
+}
+
+.tag-link {
   font-weight: 700;
 }
 
@@ -345,6 +387,99 @@ a {
   width: min(calc(100% - 32px), 920px);
 }
 
+.listing-page {
+  padding-top: 48px;
+}
+
+.page-hero {
+  padding: 34px;
+  border: 1px solid rgba(36, 24, 20, 0.08);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  background: rgba(255, 251, 246, 0.78);
+}
+
+.page-intro {
+  max-width: 44rem;
+  margin: 18px 0 0;
+  line-height: 1.9;
+  color: var(--text-soft);
+}
+
+.archive-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  color: var(--text-soft);
+}
+
+.archive-toolbar-spaced {
+  margin-top: 26px;
+}
+
+.archive-list {
+  display: grid;
+  gap: 18px;
+}
+
+.archive-item,
+.taxonomy-panel,
+.empty-state,
+.post-footer-nav,
+.post-nav-card {
+  border: 1px solid rgba(36, 24, 20, 0.08);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  background: rgba(255, 251, 246, 0.76);
+}
+
+.archive-item {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 24px;
+  padding: 28px;
+}
+
+.archive-date,
+.post-date {
+  color: var(--accent-deep);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.archive-content h2 {
+  margin: 0 0 14px;
+  font-size: 1.8rem;
+}
+
+.archive-content p {
+  margin: 0;
+  line-height: 1.8;
+  color: var(--text-soft);
+}
+
+.taxonomy-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.taxonomy-panel {
+  padding: 24px;
+}
+
+.section-heading-small {
+  margin-bottom: 16px;
+}
+
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
 .back-link {
   display: inline-flex;
   padding: 12px 18px;
@@ -377,12 +512,94 @@ a {
   padding-left: 20px;
 }
 
+.post-body h1,
+.post-body h3,
+.post-nav-card strong {
+  font-family: "Noto Serif SC", serif;
+}
+
+.post-body blockquote {
+  margin: 24px 0;
+  padding: 18px 20px;
+  border-left: 4px solid rgba(140, 71, 33, 0.55);
+  background: rgba(196, 111, 58, 0.08);
+  color: var(--text);
+}
+
+.post-body hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 28px 0;
+}
+
+.post-body code {
+  padding: 0.1rem 0.35rem;
+  border-radius: 6px;
+  background: rgba(36, 24, 20, 0.08);
+  font-family: "Consolas", "SFMono-Regular", monospace;
+  font-size: 0.95em;
+}
+
+.post-body pre {
+  overflow: auto;
+  padding: 18px;
+  border-radius: var(--radius-md);
+  background: rgba(32, 24, 19, 0.92);
+  color: var(--text-inverse);
+}
+
+.post-body pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+.post-footer-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  padding: 18px;
+  margin-top: 20px;
+}
+
+.post-nav-card {
+  display: grid;
+  gap: 10px;
+  padding: 18px;
+}
+
+.post-nav-card span {
+  color: var(--text-soft);
+  font-size: 0.9rem;
+}
+
+.post-nav-card strong {
+  font-size: 1.15rem;
+  color: var(--text);
+}
+
+.post-nav-card.is-empty {
+  opacity: 0.75;
+}
+
+.empty-state {
+  padding: 28px;
+}
+
+.empty-state h2 {
+  margin: 0 0 12px;
+}
+
 @media (max-width: 960px) {
   .hero,
   .post-list,
+  .post-list-featured,
   .project-grid,
+  .taxonomy-grid,
   .about-layout,
-  .site-footer {
+  .site-footer,
+  .post-footer-nav,
+  .archive-item {
     grid-template-columns: 1fr;
   }
 
@@ -398,6 +615,10 @@ a {
 
   .site-nav {
     gap: 12px 16px;
+  }
+
+  .archive-item {
+    display: grid;
   }
 }
 

@@ -16,14 +16,15 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body data-page="home">
     <div class="page-shell">
       <header class="site-header">
-        <a class="brand" href="#top">Piksong</a>
+        <a class="brand" href="index.html">Piksong</a>
         <nav class="site-nav">
           <a href="#about">关于</a>
-          <a href="#notes">文章</a>
+          <a href="archive.html">文章</a>
           <a href="#projects">项目</a>
+          <a href="categories.html">分类</a>
           <a href="#contact">联系</a>
         </nav>
       </header>
@@ -37,12 +38,11 @@
               <span>数字笔记本</span>
             </h1>
             <p class="hero-text">
-              我会在这里记录做过的项目、踩过的坑、偶尔闪过的灵感，
-              也把那些还没有想明白的问题先认真放下来。
+              现在它不只是一个好看的首页，而是一个可以持续写文章、做归档、按分类整理内容的个人博客。
             </p>
             <div class="hero-actions">
-              <a class="button primary" href="#notes">开始阅读</a>
-              <a class="button secondary" href="posts/welcome.html">第一篇文章</a>
+              <a class="button primary" href="archive.html">进入文章归档</a>
+              <a class="button secondary" href="categories.html">按分类浏览</a>
             </div>
           </div>
 
@@ -69,43 +69,30 @@
           </div>
           <div class="about-layout">
             <p>
-              我想要的不是一个“搭完就放着”的主页，而是一个能持续更新的个人空间。
-              它可以简单，但要有自己的气质，也要足够轻，方便我随时往里加内容。
+              这个站点现在采用纯静态 GitHub Pages 方案，但文章已经具备统一数据层和独立详情页结构，
+              后面继续写内容时不需要再手工拼整页。
             </p>
             <p>
-              所以这个版本先从纯静态页面开始：加载快、部署简单、适合直接用
-              GitHub Pages 托管。后面如果你想扩展成真正的文章系统，我们也可以继续升级。
+              你可以用 Markdown 写常规文章，也可以保留 HTML 来做更自由的展示型内容。
+              首页、归档页、分类页和上一篇下一篇导航会自动复用同一套文章元数据。
             </p>
           </div>
         </section>
 
         <section class="notes section" id="notes">
           <div class="section-heading">
-            <p class="eyebrow">NOTES</p>
+            <p class="eyebrow">LATEST</p>
             <h2>最近写下来的内容</h2>
           </div>
-          <div class="post-list">
-            <article class="post-card featured">
-              <p class="post-meta">MAY 2026 / INTRO</p>
-              <h3>博客的第一篇：为什么我还是想认真写点东西</h3>
-              <p>
-                从一个空仓库开始，把这个站点搭成一个会持续生长的个人记录空间。
-              </p>
-              <a href="posts/welcome.html">阅读全文</a>
-            </article>
+          <div class="post-list" id="recent-posts"></div>
+        </section>
 
-            <article class="post-card">
-              <p class="post-meta">COMING SOON</p>
-              <h3>调试日志</h3>
-              <p>准备整理一些嵌入式开发里反复遇到的问题和排查过程。</p>
-            </article>
-
-            <article class="post-card">
-              <p class="post-meta">COMING SOON</p>
-              <h3>项目切片</h3>
-              <p>把自己做过的东西拆成小的思路片段，方便以后复盘和重用。</p>
-            </article>
+        <section class="notes section">
+          <div class="section-heading">
+            <p class="eyebrow">FEATURED</p>
+            <h2>推荐阅读</h2>
           </div>
+          <div class="post-list post-list-featured" id="featured-posts"></div>
         </section>
 
         <section class="projects section" id="projects">
@@ -136,13 +123,16 @@
       <footer class="site-footer section" id="contact">
         <div>
           <p class="eyebrow">CONTACT</p>
-          <h2>如果你想继续完善它，我们还可以接着做</h2>
+          <h2>现在它已经可以长期写下去了</h2>
         </div>
         <div class="footer-links">
+          <a href="archive.html">文章归档</a>
+          <a href="categories.html">分类浏览</a>
           <a href="https://github.com/Piksong">GitHub</a>
-          <a href="https://github.com/Piksong/myblog.github.io">Repository</a>
         </div>
       </footer>
     </div>
+
+    <script type="module" src="scripts/blog.js"></script>
   </body>
 </html>

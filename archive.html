@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>文章归档 | Piksong Blog</title>
+    <meta name="description" content="Piksong Blog 的全部文章归档。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Noto+Serif+SC:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="archive">
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="index.html">Piksong</a>
+        <nav class="site-nav">
+          <a href="index.html">首页</a>
+          <a href="archive.html" aria-current="page">文章</a>
+          <a href="categories.html">分类</a>
+        </nav>
+      </header>
+
+      <main class="listing-page">
+        <section class="page-hero">
+          <p class="eyebrow">ARCHIVE</p>
+          <h1>全部文章</h1>
+          <p class="page-intro">
+            这里按时间倒序收拢所有文章。新增内容后，只要补文章元数据，它就会自动出现在这里。
+          </p>
+        </section>
+
+        <section class="section">
+          <div class="archive-toolbar" id="archive-summary"></div>
+          <div class="archive-list" id="archive-posts"></div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="scripts/blog.js"></script>
+  </body>
+</html>

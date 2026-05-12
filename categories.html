@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>分类浏览 | Piksong Blog</title>
+    <meta name="description" content="按分类和标签浏览 Piksong Blog 的文章。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Noto+Serif+SC:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="categories">
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="index.html">Piksong</a>
+        <nav class="site-nav">
+          <a href="index.html">首页</a>
+          <a href="archive.html">文章</a>
+          <a href="categories.html" aria-current="page">分类</a>
+        </nav>
+      </header>
+
+      <main class="listing-page">
+        <section class="page-hero">
+          <p class="eyebrow">CATEGORIES</p>
+          <h1>按分类和标签浏览</h1>
+          <p class="page-intro">
+            先做基础的一层内容组织。你以后新增文章后，分类和标签也会自动在这里更新。
+          </p>
+        </section>
+
+        <section class="section">
+          <div class="taxonomy-grid">
+            <div class="taxonomy-panel">
+              <div class="section-heading section-heading-small">
+                <p class="eyebrow">CATEGORIES</p>
+                <h2>分类</h2>
+              </div>
+              <div class="chip-group" id="category-chips"></div>
+            </div>
+            <div class="taxonomy-panel">
+              <div class="section-heading section-heading-small">
+                <p class="eyebrow">TAGS</p>
+                <h2>标签</h2>
+              </div>
+              <div class="chip-group" id="tag-chips"></div>
+            </div>
+          </div>
+
+          <div class="archive-toolbar archive-toolbar-spaced" id="filter-summary"></div>
+          <div class="archive-list" id="filtered-posts"></div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="scripts/blog.js"></script>
+  </body>
+</html>
