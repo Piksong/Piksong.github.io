@@ -775,6 +775,14 @@ a {
   padding-left: 20px;
 }
 
+.post-body ol {
+  padding-left: 22px;
+}
+
+.post-body li + li {
+  margin-top: 0.45rem;
+}
+
 .post-body blockquote {
   margin: 24px 0;
   padding: 16px 18px;
@@ -810,6 +818,100 @@ a {
 .post-body pre code {
   background: transparent;
   padding: 0;
+}
+
+.post-body figure {
+  margin: 28px 0;
+}
+
+.post-body img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(19, 13, 24, 0.92);
+}
+
+.post-body figcaption {
+  margin-top: 10px;
+  color: var(--text-soft);
+  font-size: 0.94rem;
+  line-height: 1.7;
+}
+
+.post-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  background: rgba(21, 15, 27, 0.9);
+}
+
+.post-body th,
+.post-body td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: left;
+  vertical-align: top;
+}
+
+.post-body th {
+  color: #ffffff;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.9rem;
+  background: rgba(197, 134, 192, 0.08);
+}
+
+.post-body tr:last-child td {
+  border-bottom: 0;
+}
+
+.article-lead {
+  font-size: 1.1rem;
+  color: #e5e2ea;
+}
+
+.article-callout,
+.article-checklist > div {
+  margin: 24px 0;
+  padding: 18px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  background: rgba(197, 134, 192, 0.07);
+}
+
+.article-callout strong,
+.article-checklist h3 {
+  display: block;
+  margin-bottom: 10px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.95rem;
+  color: #ffffff;
+}
+
+.article-callout ul {
+  margin: 0;
+}
+
+.article-callout-warn {
+  background: rgba(206, 145, 120, 0.09);
+}
+
+.article-checklist {
+  display: grid;
+  gap: 14px;
+  margin: 24px 0;
+}
+
+.article-checklist > div {
+  margin: 0;
+}
+
+.article-checklist p {
+  margin: 0;
 }
 
 .post-footer-nav {

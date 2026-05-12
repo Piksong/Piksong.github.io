@@ -197,8 +197,15 @@ function renderHomePage() {
     return;
   }
 
-  recentPosts.innerHTML = sortedPosts.slice(0, 3).map((post, index) => renderPostCard(post, index === 0)).join("");
-  featuredPosts.innerHTML = sortedPosts.filter((post) => post.featured).map((post) => renderPostCard(post, true)).join("");
+  const recentSelection = sortedPosts.slice(0, 3);
+  const featuredSelection = sortedPosts.filter(
+    (post) => post.featured && !recentSelection.some((recentPost) => recentPost.slug === post.slug)
+  );
+
+  recentPosts.innerHTML = recentSelection.map((post, index) => renderPostCard(post, index === 0)).join("");
+  featuredPosts.innerHTML = featuredSelection.length
+    ? featuredSelection.map((post) => renderPostCard(post, true)).join("")
+    : renderEmptyCard("更多内容还在整理", "后面会把更完整的项目、调试记录和阶段性总结继续补进来。");
 }
 
 function renderArchivePage() {

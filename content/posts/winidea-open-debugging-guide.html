@@ -1,0 +1,295 @@
+<p class="article-lead">
+  如果你手边只有一块 ST-Link，也能把 winIDEA Open 跑成一个够用的 STM32 调试台。能下载程序、打断点、单步、看串口窗口，也能直接看 FreeRTOS 的任务和队列状态。
+</p>
+
+<figure>
+  <img
+    src="../assets/posts/winidea-open-debugging-guide/freertos-tasks-window.png"
+    alt="winIDEA 中的 FreeRTOS 任务与队列视图"
+    loading="lazy"
+  />
+  <figcaption>最终效果大概就是这样：代码、任务、队列和串口输出可以放在同一个调试会话里看。</figcaption>
+</figure>
+
+<p>
+  这篇文章按 iSYSTEM 官方文档和一次实际配置流程整理，只保留第一次上手最容易卡住的步骤。默认前提是你已经有一块
+  STM32 开发板，以及一只可用的 ST-Link。
+</p>
+
+<div class="article-callout">
+  <strong>这篇文章能帮你完成什么</strong>
+  <ul>
+    <li>安装 winIDEA Open 和 ST-Link 驱动</li>
+    <li>用 ST-Link 连上 STM32 开发板</li>
+    <li>创建 workspace，下载程序，跑基础调试流程</li>
+    <li>打开 Terminal 观察串口输出</li>
+    <li>启用 FreeRTOS Awareness 看任务和队列状态</li>
+  </ul>
+</div>
+
+<h2>1. 先准备好这几样东西</h2>
+
+<ul>
+  <li>系统：Windows 10 64-bit 或更高版本</li>
+  <li>调试器：ST-Link / ST-Link V2 / ST-Link V3</li>
+  <li>目标板：任意支持 SWD 的 STM32 开发板</li>
+  <li>软件：winIDEA Open、ST-Link USB 驱动</li>
+</ul>
+
+<p>
+  winIDEA Open 本身会带上配套的 GCC 工具链，但
+  <strong>ST-Link 驱动需要单独安装</strong>。如果你之前习惯了 Keil 或 IAR 自带的一体化体验，这一步很容易漏掉。
+</p>
+
+<h2>2. 安装 winIDEA Open</h2>
+
+<p>
+  下载入口在
+  <a href="https://www.isystem.com/downloads/winidea/winidea-download.html">iSYSTEM 官方下载页</a>。安装过程本身不复杂，基本一路下一步就可以。
+</p>
+
+<figure>
+  <img
+    src="../assets/posts/winidea-open-debugging-guide/winidea-install-wizard.png"
+    alt="winIDEA 安装向导界面"
+    loading="lazy"
+  />
+  <figcaption>安装向导本身很直接，重点不是安装器，而是后面的驱动和 workspace 配置。</figcaption>
+</figure>
+
+<p>
+  装完以后先别急着开工程，先把 ST-Link 驱动也补齐。否则后面在设备管理器或者 winIDEA 里经常会表现成“看得到硬件，但连不上目标板”。
+</p>
+
+<h2>3. 把 ST-Link 和驱动先跑通</h2>
+
+<p>
+  如果你用的是常见的 ST-Link V2，先确认硬件接线至少包含下面这几根：
+</p>
+
+<figure>
+  <img
+    src="../assets/posts/winidea-open-debugging-guide/st-link-v2-photo.png"
+    alt="ST-Link V2 调试器实物图"
+    loading="lazy"
+  />
+  <figcaption>对大多数 STM32 项目来说，SWD 比 JTAG 更省事，也更常用。</figcaption>
+</figure>
+
+<table>
+  <thead>
+    <tr>
+      <th>ST-Link 引脚</th>
+      <th>作用</th>
+      <th>目标板连接</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SWDIO</td>
+      <td>双向数据线</td>
+      <td>STM32 的 SWDIO</td>
+    </tr>
+    <tr>
+      <td>SWCLK</td>
+      <td>时钟线</td>
+      <td>STM32 的 SWCLK</td>
+    </tr>
+    <tr>
+      <td>GND</td>
+      <td>参考地</td>
+      <td>开发板共地</td>
+    </tr>
+    <tr>
+      <td>RST</td>
+      <td>复位线，可选</td>
+      <td>STM32 的 NRST</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+  真正常用的是 SWDIO、SWCLK 和 GND。RST 不是必须，但在某些板子上会让复位和重新连接更稳。
+</p>
+
+<p>
+  驱动装好以后，先去 Windows 设备管理器确认 ST-Link 是否正常识别。如果这里还没对，后面在 IDE 里折腾通常也不会有结果。
+</p>
+
+<figure>
+  <img
+    src="../assets/posts/winidea-open-debugging-guide/device-manager-st-link.png"
+    alt="Windows 设备管理器中识别到 ST-Link Debug"
+    loading="lazy"
+  />
+  <figcaption>设备管理器里能正常识别到 ST-Link Debug，说明 USB 驱动这一步基本通了。</figcaption>
+</figure>
+
+<div class="article-callout article-callout-warn">
+  <strong>如果这里就失败，先别进 winIDEA</strong>
+  <ul>
+    <li>换一根真正能传数据的 USB 线</li>
+    <li>确认开发板本身已经供电</li>
+    <li>重新安装 ST 官方驱动</li>
+  </ul>
+</div>
+
+<h2>4. 新建 workspace，把调试器选成 ST-Link</h2>
+
+<p>
+  第一次打开 winIDEA，可以直接新建一个 workspace。路径你可以自己选一个干净目录，名字也尽量跟板子或项目对应起来，后面回头找会轻松很多。
+</p>
+
+<figure>
+  <img
+    src="../assets/posts/winidea-open-debugging-guide/workspace-new-wizard.png"
+    alt="winIDEA 新建 workspace 界面"
+    loading="lazy"
+  />
+  <figcaption>先把 workspace 建起来，后面 CPU、符号文件和调试器类型都围绕这个配置。</figcaption>
+</figure>
+
+<p>创建完成后，核心设置有两个：</p>
+
+<ol>
+  <li>在 CPU 列表里选对你的 STM32 型号</li>
+  <li>在 Hardware 面板里把调试器类型切到 ST-Link</li>
+</ol>
+
+<p>如果芯片型号选错，后面常见症状就是下载失败、断点行为异常，或者压根无法稳定连上目标板。</p>
+
+<h2>5. 基础调试先走完这五步</h2>
+
+<p>
+  真正开始调试时，不用一上来就把所有窗口都打开。先把这条最短路径走通：
+</p>
+
+<ol>
+  <li><code>Debug → Download</code>：把程序下载到 Flash</li>
+  <li><code>Run</code>：让程序先跑起来</li>
+  <li><code>Stop</code>：确认能稳定停住</li>
+  <li><code>Step Into / Step Over / Step Out</code>：验证单步行为</li>
+  <li><code>End Session</code>：结束会话，确认能正常退出</li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <th>状态</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>STOP</td>
+      <td>已经连接成功，CPU 当前停在断点或暂停位置</td>
+    </tr>
+    <tr>
+      <td>RUN</td>
+      <td>程序正在执行</td>
+    </tr>
+    <tr>
+      <td>OFFLINE</td>
+      <td>调试器未连接，或者会话已经结束</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+  只要这五步顺了，说明最底层的连接、芯片识别、符号加载和 run-control 基本都已经没问题。后面再加 Terminal、RTOS 视图，成本就低很多。
+</p>
+
+<h2>6. Terminal 很值得开</h2>
+
+<p>
+  winIDEA 自带 Terminal，这点对 STM32 调试其实很实用。很多时候你不需要额外再开一个串口工具，直接在调试会话里看输出就够了。
+</p>
+
+<figure>
+  <img
+    src="../assets/posts/winidea-open-debugging-guide/winidea-terminal.png"
+    alt="winIDEA 中打开 Terminal 窗口"
+    loading="lazy"
+  />
+  <figcaption>Terminal 适合接 printf、日志输出和一些最基础的交互式调试。</figcaption>
+</figure>
+
+<p>入口通常在这两个地方：</p>
+
+<ul>
+  <li><code>View → Terminal</code></li>
+  <li><code>Debug → Windows → Terminal</code></li>
+</ul>
+
+<p>
+  如果你用的是带虚拟串口功能的 ST-Link 版本，系统会额外识别出一个 COM 口。把波特率、数据位这些参数配对之后，就能直接看输出了。
+</p>
+
+<h2>7. 用 FreeRTOS Awareness 看任务状态</h2>
+
+<p>
+  这部分是我觉得 winIDEA 比“只够单步”的调试体验更值钱的地方。只要项目本身已经带了 FreeRTOS 符号，配置好以后就能直接看任务、队列、信号量这些对象。
+</p>
+
+<figure>
+  <img
+    src="../assets/posts/winidea-open-debugging-guide/freertos-config-session.png"
+    alt="Configuration Session 中配置 FreeRTOS"
+    loading="lazy"
+  />
+  <figcaption>在 Configuration Session 里把 OS 类型设成 FreeRTOS，前提是符号文件已经正确加载。</figcaption>
+</figure>
+
+<p>入口路径大致是：</p>
+
+<pre><code>Debug → Configuration Session → Symbols → OS → FreeRTOS</code></pre>
+
+<p>配置完以后，最值得先看的通常是这几样：</p>
+
+<ul>
+  <li>任务列表：优先级、状态、堆栈使用量</li>
+  <li>队列：长度、当前消息数</li>
+  <li>信号量 / 互斥量：当前计数和持有者</li>
+</ul>
+
+<figure>
+  <img
+    src="../assets/posts/winidea-open-debugging-guide/freertos-tasks-window.png"
+    alt="winIDEA 中查看 FreeRTOS 任务与队列"
+    loading="lazy"
+  />
+  <figcaption>任务状态和队列长度能直接把很多“程序像是卡住了”的问题缩小到具体对象上。</figcaption>
+</figure>
+
+<p>
+  如果你已经写了 <code>vApplicationStackOverflowHook()</code>，再结合任务列表里的栈使用量看，定位堆栈问题会比盲猜快很多。
+</p>
+
+<h2>8. 三个最常见的坑</h2>
+
+<div class="article-checklist">
+  <div>
+    <h3>ST-Link 连不上</h3>
+    <p>先看设备管理器，再换 USB 线，最后再怀疑 IDE 配置。</p>
+  </div>
+  <div>
+    <h3>Download 失败</h3>
+    <p>先确认芯片型号选对；如果板子被读保护，先做一次 Mass Erase。</p>
+  </div>
+  <div>
+    <h3>断点打不上</h3>
+    <p>ST-Link 的硬件断点数量有限，先减少断点，再考虑切换成软件断点。</p>
+  </div>
+</div>
+
+<h2>收一下尾</h2>
+
+<p>
+  如果你第一次用 winIDEA Open，我建议别把目标定成“一次性把所有功能摸完”。先把
+  <strong>连接、下载、单步、Terminal、FreeRTOS 视图</strong>
+  这条链跑通，就已经足够覆盖大部分 STM32 学习期和小项目里的日常调试了。
+</p>
+
+<p>
+  后面如果还要继续往下挖，再去补 CMake、GCC 集成和更细的 trace 能力会更合适。
+</p>
