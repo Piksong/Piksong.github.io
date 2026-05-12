@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Piksong Blog</title>
+    <meta
+      name="description"
+      content="Piksong 的个人博客，记录技术、项目和正在思考的事情。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Noto+Serif+SC:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="#top">Piksong</a>
+        <nav class="site-nav">
+          <a href="#about">关于</a>
+          <a href="#notes">文章</a>
+          <a href="#projects">项目</a>
+          <a href="#contact">联系</a>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">PERSONAL LOG / GITHUB PAGES</p>
+            <h1>
+              这是一个写给未来自己的
+              <span>数字笔记本</span>
+            </h1>
+            <p class="hero-text">
+              我会在这里记录做过的项目、踩过的坑、偶尔闪过的灵感，
+              也把那些还没有想明白的问题先认真放下来。
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#notes">开始阅读</a>
+              <a class="button secondary" href="posts/welcome.html">第一篇文章</a>
+            </div>
+          </div>
+
+          <aside class="hero-card">
+            <p class="card-label">CURRENT FOCUS</p>
+            <ul>
+              <li>嵌入式开发与调试记录</li>
+              <li>GitHub 上的个人作品整理</li>
+              <li>把零散想法写成可回看的文章</li>
+            </ul>
+            <div class="signal-grid" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </aside>
+        </section>
+
+        <section class="about section" id="about">
+          <div class="section-heading">
+            <p class="eyebrow">ABOUT</p>
+            <h2>关于这个博客</h2>
+          </div>
+          <div class="about-layout">
+            <p>
+              我想要的不是一个“搭完就放着”的主页，而是一个能持续更新的个人空间。
+              它可以简单，但要有自己的气质，也要足够轻，方便我随时往里加内容。
+            </p>
+            <p>
+              所以这个版本先从纯静态页面开始：加载快、部署简单、适合直接用
+              GitHub Pages 托管。后面如果你想扩展成真正的文章系统，我们也可以继续升级。
+            </p>
+          </div>
+        </section>
+
+        <section class="notes section" id="notes">
+          <div class="section-heading">
+            <p class="eyebrow">NOTES</p>
+            <h2>最近写下来的内容</h2>
+          </div>
+          <div class="post-list">
+            <article class="post-card featured">
+              <p class="post-meta">MAY 2026 / INTRO</p>
+              <h3>博客的第一篇：为什么我还是想认真写点东西</h3>
+              <p>
+                从一个空仓库开始，把这个站点搭成一个会持续生长的个人记录空间。
+              </p>
+              <a href="posts/welcome.html">阅读全文</a>
+            </article>
+
+            <article class="post-card">
+              <p class="post-meta">COMING SOON</p>
+              <h3>调试日志</h3>
+              <p>准备整理一些嵌入式开发里反复遇到的问题和排查过程。</p>
+            </article>
+
+            <article class="post-card">
+              <p class="post-meta">COMING SOON</p>
+              <h3>项目切片</h3>
+              <p>把自己做过的东西拆成小的思路片段，方便以后复盘和重用。</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="projects section" id="projects">
+          <div class="section-heading">
+            <p class="eyebrow">PROJECTS</p>
+            <h2>想慢慢放进来的东西</h2>
+          </div>
+          <div class="project-grid">
+            <div class="project-panel">
+              <span>01</span>
+              <h3>技术文章</h3>
+              <p>记录开发过程中的关键知识点，而不是只保留结果。</p>
+            </div>
+            <div class="project-panel">
+              <span>02</span>
+              <h3>作品展示</h3>
+              <p>把项目背景、思路、取舍和最终效果都讲清楚。</p>
+            </div>
+            <div class="project-panel">
+              <span>03</span>
+              <h3>个人索引</h3>
+              <p>把分散在仓库、笔记和设备里的内容慢慢收拢到这里。</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer section" id="contact">
+        <div>
+          <p class="eyebrow">CONTACT</p>
+          <h2>如果你想继续完善它，我们还可以接着做</h2>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/Piksong">GitHub</a>
+          <a href="https://github.com/Piksong/myblog.github.io">Repository</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
