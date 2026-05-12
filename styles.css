@@ -72,8 +72,8 @@ body::after {
     );
   background-size: 100% 6px;
   mix-blend-mode: screen;
-  opacity: 0.34;
-  animation: scanlines 12s linear infinite;
+  opacity: 0.14;
+  animation: scanlines 20s linear infinite;
 }
 
 a {
@@ -97,7 +97,7 @@ a {
   border-radius: 999px;
   background: radial-gradient(circle, rgba(86, 156, 214, 0.14), transparent 68%);
   filter: blur(40px);
-  opacity: 0.55;
+  opacity: 0.24;
   z-index: -1;
 }
 
@@ -281,7 +281,7 @@ a {
   bottom: 28px;
   font-family: "JetBrains Mono", monospace;
   font-size: 1.8rem;
-  color: var(--accent-3);
+  color: rgba(78, 201, 176, 0.6);
   animation: blink 1.15s steps(1) infinite;
 }
 
@@ -461,7 +461,7 @@ a {
   background:
     linear-gradient(180deg, rgba(86, 156, 214, 0.16), rgba(30, 30, 30, 0.16)),
     linear-gradient(90deg, rgba(197, 134, 192, 0.16), rgba(206, 145, 120, 0.08));
-  animation: pulse-panel 6s ease-in-out infinite;
+  animation: pulse-panel 10s ease-in-out infinite;
 }
 
 .signal-grid span:nth-child(2) {
@@ -537,6 +537,16 @@ a {
   border-color: rgba(86, 156, 214, 0.24);
   background:
     linear-gradient(180deg, rgba(45, 45, 48, 0.98), rgba(30, 30, 30, 0.98));
+}
+
+.post-card-empty {
+  border-style: dashed;
+  background:
+    linear-gradient(180deg, rgba(37, 37, 38, 0.72), rgba(30, 30, 30, 0.72));
+}
+
+.post-card-empty h3 {
+  color: var(--text);
 }
 
 .post-card h3,
@@ -850,11 +860,11 @@ a {
   0%,
   100% {
     transform: translateY(0);
-    opacity: 0.92;
+    opacity: 0.74;
   }
   50% {
-    transform: translateY(-4px);
-    opacity: 1;
+    transform: translateY(-2px);
+    opacity: 0.88;
   }
 }
 

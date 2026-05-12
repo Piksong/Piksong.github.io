@@ -169,9 +169,33 @@ function renderPostCard(post, featured = false) {
   `;
 }
 
+function renderEmptyCard(title, description, actionLabel, actionHref) {
+  return `
+    <article class="post-card post-card-empty">
+      <p class="post-meta">EMPTY SLOT</p>
+      <h3>${title}</h3>
+      <p>${description}</p>
+      ${actionLabel && actionHref ? `<a href="${actionHref}">${actionLabel}</a>` : ""}
+    </article>
+  `;
+}
+
 function renderHomePage() {
   const recentPosts = document.getElementById("recent-posts");
   const featuredPosts = document.getElementById("featured-posts");
+
+  if (!sortedPosts.length) {
+    recentPosts.innerHTML = [
+      renderEmptyCard("还没有文章", "把你的第一篇内容加到 `data/posts.js` 之后，这里会自动出现。"),
+      renderEmptyCard("支持 Markdown", "常规文章建议放进 `content/posts/*.md`。"),
+      renderEmptyCard("也支持 HTML", "展示型内容可以继续用 HTML 正文文件。")
+    ].join("");
+    featuredPosts.innerHTML = [
+      renderEmptyCard("准备上传自己的内容", "现在首页已经是干净骨架，不会再展示默认示例文章。"),
+      renderEmptyCard("下一步只需要补内容", "正文文件、文章入口页和一条元数据就够了。")
+    ].join("");
+    return;
+  }
 
   recentPosts.innerHTML = sortedPosts.slice(0, 3).map((post, index) => renderPostCard(post, index === 0)).join("");
   featuredPosts.innerHTML = sortedPosts.filter((post) => post.featured).map((post) => renderPostCard(post, true)).join("");
@@ -180,6 +204,12 @@ function renderHomePage() {
 function renderArchivePage() {
   const summary = document.getElementById("archive-summary");
   const container = document.getElementById("archive-posts");
+
+  if (!sortedPosts.length) {
+    summary.innerHTML = "<p>目前还没有公开文章。</p>";
+    container.innerHTML = `<article class="empty-state"><h2>归档还是空的</h2><p>等你把第一篇文章元数据加进来，这里就会开始按时间自动整理。</p></article>`;
+    return;
+  }
 
   summary.innerHTML = `<p>共 ${sortedPosts.length} 篇文章，按最新时间排序。</p>`;
   container.innerHTML = sortedPosts
@@ -214,6 +244,14 @@ function renderCategoriesPage() {
   const tagChips = document.getElementById("tag-chips");
   const summary = document.getElementById("filter-summary");
   const container = document.getElementById("filtered-posts");
+
+  if (!sortedPosts.length) {
+    categoryChips.innerHTML = "";
+    tagChips.innerHTML = "";
+    summary.innerHTML = "<p>还没有分类或标签。</p>";
+    container.innerHTML = `<article class="empty-state"><h2>这里会在你发布文章后自动生成</h2><p>分类和标签不需要单独维护，都会从文章元数据里汇总出来。</p></article>`;
+    return;
+  }
 
   const categories = [...new Set(sortedPosts.map((post) => post.category))];
   const tags = [...new Set(sortedPosts.flatMap((post) => post.tags))];
