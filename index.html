@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Noto+Serif+SC:wght@500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -32,13 +32,14 @@
       <main id="top">
         <section class="hero">
           <div class="hero-copy">
-            <p class="eyebrow">PERSONAL LOG / GITHUB PAGES</p>
+            <p class="eyebrow">WORKSPACE / PERSONAL LOG / GITHUB PAGES</p>
             <h1>
-              这是一个写给未来自己的
-              <span>数字笔记本</span>
+              像编辑器一样
+              <span>持续编译想法</span>
             </h1>
             <p class="hero-text">
-              现在它不只是一个好看的首页，而是一个可以持续写文章、做归档、按分类整理内容的个人博客。
+              我想把这个博客做得像一个长期打开的工作台。
+              文章、调试记录、项目切片都像代码一样被版本化、归档和重读。
             </p>
             <div class="hero-actions">
               <a class="button primary" href="archive.html">进入文章归档</a>
@@ -47,17 +48,29 @@
           </div>
 
           <aside class="hero-card">
-            <p class="card-label">CURRENT FOCUS</p>
-            <ul>
-              <li>嵌入式开发与调试记录</li>
-              <li>GitHub 上的个人作品整理</li>
-              <li>把零散想法写成可回看的文章</li>
-            </ul>
-            <div class="signal-grid" aria-hidden="true">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
+            <div class="editor-panel">
+              <div class="editor-tabs" aria-hidden="true">
+                <span class="tab is-active">blog.config</span>
+                <span class="tab">notes.feed</span>
+                <span class="tab">ideas.log</span>
+              </div>
+              <p class="card-label">CURRENT FOCUS</p>
+              <div class="code-list">
+                <p><span>01</span>嵌入式开发与调试记录</p>
+                <p><span>02</span>GitHub 上的个人作品整理</p>
+                <p><span>03</span>把零散想法写成可回看的文章</p>
+              </div>
+              <div class="signal-grid" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div class="editor-status">
+                <span>main</span>
+                <span>posts: 3</span>
+                <span>mode: writing</span>
+              </div>
             </div>
           </aside>
         </section>
