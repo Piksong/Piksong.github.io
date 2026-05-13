@@ -33,6 +33,35 @@ Personal blog hosted with GitHub Pages.
 
 下面这套就是你以后手动发文的标准流程。
 
+### 更省事的方式：直接用脚手架命令
+
+你现在也可以直接运行这个命令，让仓库先把文章骨架搭好：
+
+```powershell
+python tools/new_post.py `
+  --slug "my-new-post" `
+  --title "把这里改成文章标题" `
+  --summary "这里写一段会出现在首页卡片和搜索描述里的摘要。" `
+  --category "嵌入式" `
+  --tags "STM32,调试,笔记" `
+  --hero-kicker "STM32 / NOTES" `
+  --hero-intro "这里写文章页顶部那段引导文案。"
+```
+
+这个命令会自动帮你：
+
+- 新建正文文件
+- 新建 `posts/<slug>.html`
+- 新建 `assets/posts/<slug>/`
+- 往 `data/posts.js` 里加一条元数据
+- 往 `sitemap.xml` 里加一条新文章地址
+
+如果你想先看看会改什么，不真正落盘，可以加：
+
+```powershell
+--dry-run
+```
+
 ### 1. 确定一个 slug
 
 比如这篇文章的 slug 是：
@@ -107,6 +136,8 @@ posts/<slug>.html
 ### 5. 更新 `sitemap.xml`
 
 在 `sitemap.xml` 里加一条新的 `<url>`，至少把新文章地址和日期补进去。
+
+如果你用了 `python tools/new_post.py ...`，这一步会自动完成。
 
 ### 6. 本地自检
 
