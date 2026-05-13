@@ -29,6 +29,56 @@ Personal blog hosted with GitHub Pages.
 
 但 GitHub Pages 站点是否已经被搜到，还取决于搜索引擎何时抓取。
 
+## 和 Obsidian 知识库怎么结合
+
+可以结合，而且很适合结合，但我更推荐“内容联动，仓库分离”：
+
+- 知识库继续放在 `E:\PLF_knowlege_base`
+- 公开 blog 仓库继续放在 `E:\CdodeX_workspace\myblog.github.io`
+- Obsidian 负责写原始笔记、学习记录、草稿
+- blog 仓库负责放最终公开版本
+
+这样做的好处：
+
+- 不容易把整个私有知识库误传到公开仓库
+- Obsidian 里可以保留半成品、私人想法和内部笔记
+- blog 仓库只保留已经整理好的公开内容
+- AI IDE 可以同时读取知识库和 blog 仓库，做“分析 -> 改写 -> 发布”
+
+### 推荐工作流
+
+最稳的工作流是：
+
+1. 在 Obsidian 知识库里先写原始笔记
+   - 例如放到 `E:\PLF_knowlege_base\Second_brain\Notes\ISYSTEM\`
+2. 用 AI IDE 基于原始笔记整理出适合公开的版本
+3. 把公开版落到 blog 仓库
+   - 正文：`content/posts/`
+   - 配图：`assets/posts/<slug>/`
+   - 入口页：`posts/<slug>.html`
+   - 元数据：`data/posts.js`
+4. 本地预览后再 `git push origin main`
+
+### 不推荐的做法
+
+不推荐直接把整个 `E:\PLF_knowlege_base` 当成公开 blog 仓库来推送，因为：
+
+- 很容易把私人笔记、草稿、客户信息一起带出去
+- Obsidian 知识库里的文件组织方式，不一定适合直接公开
+- blog 需要更稳定的 slug、图片目录和文章入口页结构
+
+### 如果以后真的想物理合并
+
+如果你后面确定要把 blog 移进知识库，建议至少保持这个边界：
+
+```text
+E:\PLF_knowlege_base\Second_brain\Notes\
+  Blog\
+    myblog.github.io\
+```
+
+不要直接把整个 `Notes` 根目录当成 GitHub Pages 仓库。
+
 ## 下次你自己发文章怎么做
 
 下面这套就是你以后手动发文的标准流程。
