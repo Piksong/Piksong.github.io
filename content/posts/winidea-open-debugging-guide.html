@@ -1,5 +1,5 @@
 <p class="article-lead">
-  如果你手边只有一块 ST-Link，也能把 winIDEA Open 跑成一个够用的 STM32 调试台。能下载程序、打断点、单步、看串口窗口，也能直接看 FreeRTOS 的任务和队列状态。
+  如果你手边只有一块 ST-Link，也能把 winIDEA 跑成一个够用的 STM32 调试台。能下载程序、打断点、单步、看串口窗口，也能直接看 FreeRTOS 的任务和队列状态。
 </p>
 
 <figure>
@@ -16,10 +16,15 @@
   STM32 开发板，以及一只可用的 ST-Link。
 </p>
 
+<p>
+  如果你对 winIDEA 的基本界面和常用功能还不熟，可以先参考这个教学视频：
+  <a href="https://www.bilibili.com/video/BV1GxmoYuEVZ/?share_source=copy_web&amp;vd_source=2c4af5c460dce9e4ee23e2fb785db2b7">【tasking debug isystem调试器的使用教程，快速入门。可以调试英飞凌、瑞萨、NXP、国产单片机等】</a>。
+</p>
+
 <div class="article-callout">
   <strong>这篇文章能帮你完成什么</strong>
   <ul>
-    <li>安装 winIDEA Open 和 ST-Link 驱动</li>
+    <li>安装 winIDEA 和 ST-Link 驱动</li>
     <li>用 ST-Link 连上 STM32 开发板</li>
     <li>创建 workspace，下载程序，跑基础调试流程</li>
     <li>打开 Terminal 观察串口输出</li>
@@ -33,15 +38,15 @@
   <li>系统：Windows 10 64-bit 或更高版本</li>
   <li>调试器：ST-Link / ST-Link V2 / ST-Link V3</li>
   <li>目标板：任意支持 SWD 的 STM32 开发板</li>
-  <li>软件：winIDEA Open、ST-Link USB 驱动</li>
+  <li>软件：winIDEA、ST-Link USB 驱动</li>
 </ul>
 
 <p>
-  winIDEA Open 本身会带上配套的 GCC 工具链，但
+  winIDEA 本身会带上配套的 GCC 工具链，但
   <strong>ST-Link 驱动需要单独安装</strong>。如果你之前习惯了 Keil 或 IAR 自带的一体化体验，这一步很容易漏掉。
 </p>
 
-<h2>2. 安装 winIDEA Open</h2>
+<h2>2. 安装 winIDEA</h2>
 
 <p>
   下载入口在
@@ -285,11 +290,15 @@
 <h2>收一下尾</h2>
 
 <p>
-  如果你第一次用 winIDEA Open，我建议别把目标定成“一次性把所有功能摸完”。先把
+  如果你第一次用 winIDEA，我建议别把目标定成“一次性把所有功能摸完”。先把
   <strong>连接、下载、单步、Terminal、FreeRTOS 视图</strong>
   这条链跑通，就已经足够覆盖大部分 STM32 学习期和小项目里的日常调试了。
 </p>
 
 <p>
   后面如果还要继续往下挖，再去补 CMake、GCC 集成和更细的 trace 能力会更合适。
+</p>
+
+<p>
+  下期也可以继续介绍如何使用免费的英飞凌调试工具 miniWiggler，配合 winIDEA 调试英飞凌 TriCore 系列单片机。
 </p>
