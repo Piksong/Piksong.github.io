@@ -161,6 +161,26 @@
   <li>在 Hardware 面板里把调试器类型切到 ST-Link</li>
 </ol>
 
+<p>
+  第二步不要省。新建完 workspace 以后，直接进
+  <code>Hardware → Debugger Hardware...</code>，
+  在弹出的 Hardware Configuration 窗口里，把
+  <code>Hardware Type</code> 明确切到 <code>ST-Link</code>。
+</p>
+
+<figure>
+  <img
+    src="../assets/posts/winidea-debugging-guide/hardware-config-st-link.png"
+    alt="winIDEA 中在 Hardware Configuration 里把 Hardware Type 设置成 ST-Link"
+    loading="lazy"
+  />
+  <figcaption>这一步很关键。只有把 Hardware Type 明确设成 ST-Link，后面的下载、运行和断点行为才会真正走到正确的调试器上。</figcaption>
+</figure>
+
+<p>
+  如果这里保持成别的选项，比如 iC5000、PE-micro 或其他调试器类型，后面常见症状就是根本连不上板子，或者看起来能开会话，但下载和控制都不稳定。
+</p>
+
 <p>如果芯片型号选错，后面常见症状就是下载失败、断点行为异常，或者压根无法稳定连上目标板。</p>
 
 <h2>5. 基础调试先走完这五步</h2>
