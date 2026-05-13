@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://piksong.github.io/sitemap.xml
