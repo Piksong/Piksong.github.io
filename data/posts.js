@@ -1,6 +1,6 @@
 export const posts = [
   {
-    slug: "winidea-open-debugging-guide",
+    slug: "winidea-debugging-guide",
     title: "用 ST-Link 跑通 winIDEA：一份面向 STM32 初学者的调试指南",
     date: "2026-05-12",
     summary:
@@ -12,7 +12,7 @@ export const posts = [
       "手边只有一块 ST-Link，也可以把 winIDEA 跑成一套够用的 STM32 调试工作台。这篇文章把最容易卡住的步骤收成了一条能直接照着做的路径。",
     featured: true,
     contentType: "html",
-    contentPath: "../content/posts/winidea-open-debugging-guide.html",
-    path: "../posts/winidea-open-debugging-guide.html"
+    contentPath: "../content/posts/winidea-debugging-guide.html",
+    path: "../posts/winidea-debugging-guide.html"
   }
 ];

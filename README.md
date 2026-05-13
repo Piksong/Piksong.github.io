@@ -67,7 +67,7 @@ python tools/new_post.py `
 比如这篇文章的 slug 是：
 
 ```text
-winidea-open-debugging-guide
+winidea-debugging-guide
 ```
 
 以后这个 slug 会同时出现在：
